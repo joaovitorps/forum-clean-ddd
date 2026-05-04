@@ -4,13 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "biome:check": "biome check .",
+    "biome:format": "biome format .",
+    "biome:lint": "biome lint .",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "check": "npm run biome:check && npm run typecheck",
+    "format:write": "biome format . --write",
+    "lint:fix": "biome lint . --write",
+    "fix": "biome check . --write"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
+    "@biomejs/biome": "^2.4.14",
     "@types/node": "25.6.0",
     "typescript": "6.0.3",
     "vitest": "4.1.5"
