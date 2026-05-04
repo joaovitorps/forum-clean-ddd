@@ -1,5 +1,5 @@
-import type { Instructor } from "../entities/instructor";
+import type { Instructor } from "@/domain/entities/instructor";
 
 export interface InstructorRepository {
-    create(data: Instructor): Promise<Instructor>
+  create(data: Instructor): Promise<Instructor>;
 }

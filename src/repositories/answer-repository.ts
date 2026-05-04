@@ -1,5 +1,5 @@
-import type { Answer } from "../entities/answer";
+import type { Answer } from "@/domain/entities/answer";
 
 export interface AnswerRepository {
-    create(data: Answer): Promise<void>
+  create(data: Answer): Promise<void>;
 }

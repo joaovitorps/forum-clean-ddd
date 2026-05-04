@@ -1,9 +1,9 @@
+import { Answer } from "@/domain/entities/answer";
 import type { AnswerRepository } from "@/repositories/answer-repository";
 import { AnswerQuestionUseCase } from "./answer-questions";
-import { Answer } from "@/domain/entities/answer";
 
 class FakeRepository implements AnswerRepository {
-  create = async (data: Answer) => {
+  create = async (_data: Answer) => {
     return;
   };
 }
