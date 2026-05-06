@@ -15,7 +15,7 @@ interface QuestionProps {
 }
 
 export class Question extends Entity<QuestionProps> {
-  get authorIdd() {
+  get authorId() {
     return this.props.authorId;
   }
 
