@@ -1,21 +1,25 @@
-import type { Question } from "../../enterprise/entities/question";
-import type { QuestionRepository } from "../repositories/question-repository";
+import { InMemoryQuestion } from "@test/repositories/in-memory-questions-repository";
 import { CreateQuestionUseCase } from "./create-questions";
 
-class FakeRepository implements QuestionRepository {
-  create = async (_data: Question) => {};
-}
+describe("Create question use case", () => {
+  let questionRepo: InMemoryQuestion;
+  let sut: CreateQuestionUseCase;
 
-test("it should be able to question a question", async () => {
-  const sut = new CreateQuestionUseCase(new FakeRepository());
+  beforeEach(() => {
+    questionRepo = new InMemoryQuestion();
+    sut = new CreateQuestionUseCase(questionRepo);
+  });
 
-  const questionData = {
-    authorId: "1",
-    title: "this is a new questions",
-    content: "New question",
-  };
+  test("it should be able to question a question", async () => {
+    const questionData = {
+      authorId: "1",
+      title: "this is a new questions",
+      content: "New question",
+    };
 
-  const { question } = await sut.execute(questionData);
+    const { question } = await sut.execute(questionData);
 
-  expect(question.authorId).toBeTruthy;
+    expect(question.authorId).toBeTruthy;
+    expect(question.title).toEqual(questionData.title);
+  });
 });
