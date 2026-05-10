@@ -4,7 +4,7 @@ import { Entity } from "@/core/entities/entity";
 import type { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { Slug } from "./object-values/slug";
 
-interface QuestionProps {
+export interface QuestionProps {
   authorId: UniqueEntityID;
   bestAnswerId?: UniqueEntityID | undefined;
   title: string;
