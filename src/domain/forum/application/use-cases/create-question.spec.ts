@@ -10,7 +10,7 @@ describe("Create question use case", () => {
     sut = new CreateQuestionUseCase(questionRepo);
   });
 
-  test("it should be able to question a question", async () => {
+  test("it should be able to create a question", async () => {
     const questionData = {
       authorId: "1",
       title: "this is a new questions",
