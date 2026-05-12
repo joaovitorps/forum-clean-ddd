@@ -33,4 +33,23 @@ describe("Choose best answer use case", () => {
     expect(question.bestAnswerId).toEqual(newAnswer.id);
     expect(answerRepo.answers).toHaveLength(2);
   });
+
+  it("should not be able to choose the best answer for a question if the user is different from user that created the question", async () => {
+    const { newQuestion } = makeQuestion();
+
+    const { newAnswer } = makeAnswer({ questionId: newQuestion.id });
+    const answerChosen = makeAnswer({ questionId: newQuestion.id });
+
+    questionRepo.create(newQuestion);
+
+    answerRepo.create(newAnswer);
+    answerRepo.create(answerChosen.newAnswer);
+
+    await expect(() =>
+      sut.execute({
+        answerId: newAnswer.id.toString(),
+        authorId: "non-existing-id",
+      }),
+    ).rejects.toBeInstanceOf(Error);
+  });
 });

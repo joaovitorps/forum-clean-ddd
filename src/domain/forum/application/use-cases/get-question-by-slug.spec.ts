@@ -1,8 +1,6 @@
 import { makeQuestion } from "@test/factories/make-question";
 import { InMemoryQuestion } from "@test/repositories/in-memory-questions-repository";
-import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { Slug } from "../../enterprise/entities/object-values/slug";
-import { Question } from "../../enterprise/entities/question";
 import { GetQuestionBySlug } from "./get-question-by-slug";
 
 describe("Get question by slug use case", () => {
