@@ -9,7 +9,7 @@ export function makeQuestionComment(
   overwrite: Partial<QuestionCommentProps> = {},
   id?: UniqueEntityID,
 ) {
-  const newQuestion = QuestionComment.create(
+  const newQuestionComment = QuestionComment.create(
     {
       authorId: new UniqueEntityID(),
       questionId: new UniqueEntityID(),
@@ -19,5 +19,5 @@ export function makeQuestionComment(
     id,
   );
 
-  return { newQuestion };
+  return { newQuestionComment };
 }

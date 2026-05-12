@@ -13,32 +13,32 @@ describe("Delete question comment use case", () => {
   });
 
   test("it should be able to delete a question", async () => {
-    const { newQuestion } = makeQuestionComment();
+    const { newQuestionComment } = makeQuestionComment();
 
-    questionCommentRepo.create(newQuestion);
+    questionCommentRepo.create(newQuestionComment);
 
     expect(questionCommentRepo.questionComments).toHaveLength(1);
 
     await sut.execute({
-      questionCommentId: newQuestion.id.toString(),
-      authorId: newQuestion.authorId.toString(),
+      questionCommentId: newQuestionComment.id.toString(),
+      authorId: newQuestionComment.authorId.toString(),
     });
 
     expect(questionCommentRepo.questionComments).toHaveLength(0);
   });
 
   test("it not should be able to delete a question if has a different authorId", async () => {
-    const { newQuestion } = makeQuestionComment({
+    const { newQuestionComment } = makeQuestionComment({
       authorId: new UniqueEntityID("author-1"),
     });
 
-    questionCommentRepo.create(newQuestion);
+    questionCommentRepo.create(newQuestionComment);
 
     expect(questionCommentRepo.questionComments).toHaveLength(1);
 
     await expect(() =>
       sut.execute({
-        questionCommentId: newQuestion.id.toString(),
+        questionCommentId: newQuestionComment.id.toString(),
         authorId: "author-2",
       }),
     ).rejects.toBeInstanceOf(Error);

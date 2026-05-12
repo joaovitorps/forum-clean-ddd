@@ -4,7 +4,7 @@ import { InMemoryAnswer } from "@test/repositories/in-memory-answers-repository"
 import { InMemoryQuestion } from "@test/repositories/in-memory-questions-repository";
 import { FetchAnswersByQuestionUseCase } from "./fetch-answers-by-question";
 
-describe("Fetch recent questions use case", () => {
+describe("Fetch answers by question use case", () => {
   let answerRepo: InMemoryAnswer;
   let questionRepo: InMemoryQuestion;
   let sut: FetchAnswersByQuestionUseCase;
