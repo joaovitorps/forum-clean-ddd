@@ -1,16 +1,22 @@
+import { type Either, left, right } from "@/core/either";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import type { Question } from "../../enterprise/entities/question";
 import type { AnswerRepository } from "../repositories/answer-repository";
 import type { QuestionRepository } from "../repositories/question-repository";
+import { NotAllowedError } from "./error/not-allowed-error";
+import { ResourceNotFoundError } from "./error/resource-not-found-error";
 
 interface ChooseBestAnswerUseCaseParams {
   answerId: string;
   authorId: string;
 }
 
-interface ChooseBestAnswerUseCaseReturn {
-  question: Question;
-}
+type ChooseBestAnswerUseCaseReturn = Either<
+  ResourceNotFoundError | NotAllowedError,
+  {
+    question: Question;
+  }
+>;
 
 export class ChooseBestAnswerUseCase {
   constructor(
@@ -24,7 +30,7 @@ export class ChooseBestAnswerUseCase {
     const answer = await this.answerRepo.getById(answerId);
 
     if (!answer) {
-      throw new Error("Not found.");
+      return left(new ResourceNotFoundError());
     }
 
     const question = await this.questionRepo.getById(
@@ -32,15 +38,15 @@ export class ChooseBestAnswerUseCase {
     );
 
     if (!question) {
-      throw new Error("Not found.");
+      return left(new ResourceNotFoundError());
     }
 
     if (question.authorId.toString() !== authorId) {
-      throw new Error("Not allowed.");
+      return left(new NotAllowedError());
     }
 
     question.bestAnswerId = new UniqueEntityID(answerId);
 
-    return { question };
+    return right({ question });
   }
 }
